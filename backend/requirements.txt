@@ -1,0 +1,6 @@
+Flask==2.3.3
+Flask-CORS==4.0.1
+Flask-RESTx==1.2.0
+firebase-admin==6.4.0
+python-dotenv==1.0.0
+jinja2==3.1.2

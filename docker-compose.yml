@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FIREBASE_CREDENTIALS=/app/firebase-credentials.json
+    volumes:
+      - ./backend:/app
+    command: python run.py
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

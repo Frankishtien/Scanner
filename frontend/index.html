@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureCode AI - SAST Platform</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo-icon"></span>
+                <span class="logo-text">SecureCode<span class="highlight"></span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#scan">Scan</a>
+                <a href="#results">Results</a>
+                <button id="theme-toggle" class="theme-btn">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="badge">🚀 Graduation Project</span>
+                    <h1>Static Application <br><span class="gradient-text">Security Testing</span></h1>
+                    <p>AI-powered vulnerability detection for modern applications. Scan your code, find security issues, and fix them before they become problems.</p>
+                    <div class="hero-actions">
+                        <a href="#scan" class="btn btn-primary btn-large">Start Scanning →</a>
+                        <a href="#features" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">Vulnerability Types</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Scanners Integrated</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Languages Supported</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scanner Status -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">System Status</span>
+                <h2>Available Scanners</h2>
+                <p>Check which security scanners are ready to protect your code</p>
+            </div>
+            <div id="scanner-status" class="scanner-grid"></div>
+        </div>
+    </section>
+
+    <!-- Scan Section -->
+    <section class="section section-dark" id="scan">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Scan Your Code</span>
+                <h2>Choose Your Scan Method</h2>
+                <p>Paste code, upload files, or scan entire repositories</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="paste">📝 Paste Code</button>
+                <button class="tab-btn" data-tab="upload">📤 Upload Files</button>
+                <button class="tab-btn" data-tab="github">🐙 GitHub Repo</button>
+            </div>
+
+            <!-- Paste Code Tab -->
+            <div class="tab-content active" id="paste-tab">
+                <form id="paste-form" class="scan-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Programming Language</label>
+                            <select id="code-language" class="form-control">
+                                <option value="python">🐍 Python</option>
+                                <option value="php">🐘 PHP</option>
+                                <option value="javascript">📜 JavaScript</option>
+                                <option value="java">☕ Java</option>
+                                <option value="go">🐹 Go</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Scan Options</label>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="paste-custom-engine" checked>
+                                    <span>Custom Engine</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="paste-external-scanners" checked>
+                                    <span>External Scanners</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Paste Your Code</label>
+                        <textarea id="code-input" class="code-editor" placeholder="Paste your code here to scan for vulnerabilities..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">🔍 Scan Code</button>
+                </form>
+            </div>
+
+            <!-- Upload Tab -->
+            <div class="tab-content" id="upload-tab">
+                <form id="upload-form" class="scan-form">
+                    <div class="upload-zone" id="upload-zone">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drop your files here</h3>
+                        <p>or click to browse</p>
+                        <input type="file" id="file-input" accept=".zip,.py,.php,.js,.html,.java,.go,.rb" multiple style="display:none">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('file-input').click()">
+                            Choose Files
+                        </button>
+                        <div id="file-list" class="file-list"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="custom-engine" checked>
+                                <span>Custom Detection Engine</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="external-scanners" checked>
+                                <span>External Scanners</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">📤 Upload & Scan</button>
+                </form>
+            </div>
+
+            <!-- GitHub Tab -->
+            <div class="tab-content" id="github-tab">
+                <form id="github-form" class="scan-form">
+                    <div class="form-group">
+                        <label>GitHub Repository URL</label>
+                        <input type="url" id="github-url" class="form-control" placeholder="https://github.com/username/repository" required>
+                        <span class="help-text">Enter a public GitHub repository URL</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="github-custom-engine" checked>
+                                <span>Custom Detection Engine</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="github-external-scanners" checked>
+                                <span>External Scanners</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">🐙 Scan Repository</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="section" id="results">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Results</span>
+                <h2>Security Analysis Report</h2>
+                <p>Detailed findings and recommendations for your code</p>
+            </div>
+            
+            <div id="results-container" class="results-container hidden">
+                <!-- Score Overview -->
+                <div class="score-overview">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" stroke-width="12"/>
+                            <circle id="score-circle" cx="60" cy="60" r="54" fill="none" stroke="#667eea" stroke-width="12" 
+                                    stroke-dasharray="339.292" stroke-dashoffset="339.292" 
+                                    stroke-linecap="round"/>
+                        </svg>
+                        <div class="score-text">
+                            <span id="overall-score">--</span>
+                            <small>/ 100</small>
+                        </div>
+                    </div>
+                    <div class="score-details">
+                        <div class="risk-badge" id="risk-badge">
+                            <span class="risk-label">Risk Level</span>
+                            <span class="risk-value" id="risk-level">--</span>
+                        </div>
+                        <div class="category-scores-grid" id="category-scores-grid">
+                            <p class="text-muted" id="no-categories-msg">No vulnerabilities found in any category</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary & Recommendations -->
+                <div class="results-grid">
+                    <div class="summary-card">
+                        <h3>📊 Vulnerability Summary</h3>
+                        <div id="summary-container"></div>
+                    </div>
+                    <div class="recommendations-card">
+                        <h3>💡 Recommendations</h3>
+                        <div id="recommendations"></div>
+                    </div>
+                </div>
+
+                <!-- Vulnerabilities List -->
+                <div class="vulnerabilities-section">
+                    <div class="vuln-header">
+                        <h3>🔍 Vulnerabilities Found</h3>
+                        <span id="vuln-count" class="vuln-count">0</span>
+                    </div>
+                    <div id="vulnerabilities-list"></div>
+                </div>
+            </div>
+
+            <div id="empty-state" class="empty-state">
+                <div class="empty-icon">🔒</div>
+                <h3>No Scan Results Yet</h3>
+                <p>Use the scan options above to analyze your code for security vulnerabilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Toast -->
+    <div id="message-toast" class="toast hidden"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="loading-message">Scanning your code...</p>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🛡️</span>
+                    <span>SecureCode AI</span>
+                </div>
+                <p>&copy; 2026 Graduation Project - All Rights Reserved</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Documentation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
