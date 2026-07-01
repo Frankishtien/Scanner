@@ -6,5 +6,3 @@ __pycache__/
 venv/
 myenv/
 .firebase/
-backend/firebase-credentials.json
-backend/firebase-credentials.json
